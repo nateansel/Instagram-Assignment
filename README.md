@@ -38,6 +38,8 @@ Here's a walkthrough of implemented user stories:
 
 <img src='http://i.imgur.com/sXITAWg.gif' title='Video Walkthrough' width='' alt='Video Walkthrough'/>
 
+[GIF Link](http://i.imgur.com/sXITAWg.gif) (it is not rendering properly on GitHub)
+
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
