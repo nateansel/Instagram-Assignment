@@ -36,7 +36,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/sXITAWg.gif' title='Video Walkthrough' width='' alt='Video Walkthrough'/>
+<img src='https://github.com/nathan3o4/Instagram-Assignment/raw/master/InstagramWalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough'/>
 
 [GIF Link](http://i.imgur.com/sXITAWg.gif) (it is not rendering properly on GitHub)
 
