@@ -7,19 +7,57 @@
 //
 
 import UIKit
+import Parse
 
 class ViewController: UIViewController {
+  
+  // MARK: - Properties
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+  @IBOutlet weak var usernameTextField: UITextField!
+  @IBOutlet weak var passwordTextField: UITextField!
+  
+  // MARK: - Methods
+  
+//  override func viewWillAppear(animated: Bool) {
+//    super.viewWillAppear(animated)
+//    
+//    if let _ = PFUser.currentUser() {
+//      presentViewController(
+//        UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("TabBarController"),
+//        animated: false,
+//        completion: nil)
+//    }
+//  }
+  
+  @IBAction func signInButtonPressed(sender: AnyObject) {
+    PFUser.logInWithUsernameInBackground(usernameTextField.text!, password: passwordTextField.text!) { (user: PFUser?, error: NSError?) -> Void in
+      if let _ = user {
+        print("You're logged in!")
+        self.performSegueWithIdentifier("loginSegue", sender: sender)
+      }
+      else {
+        print(error?.localizedDescription)
+      }
+    }
   }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  
+  
+  @IBAction func signUpButtonPressed(sender: AnyObject) {
+    let newUser = PFUser()
+    newUser.username = usernameTextField.text
+    newUser.password = passwordTextField.text
+    newUser.signUpInBackgroundWithBlock { (finished: Bool, error: NSError?) -> Void in
+      if finished {
+        print("Created a user!")
+        self.performSegueWithIdentifier("loginSegue", sender: sender)
+      }
+      else {
+        print(error?.localizedDescription)
+        if error?.code == 202 {
+          print("username is taken")
+        }
+      }
+    }
   }
-
-
 }
 

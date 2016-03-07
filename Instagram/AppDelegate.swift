@@ -7,15 +7,36 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
+    
+    Parse.initializeWithConfiguration(
+      ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
+        configuration.applicationId = "Instagram"
+        configuration.clientKey = "al;kfn'13lknf380-1938r7;lxjwelirzxzz"
+        configuration.server = "https://cryptic-temple-60152.herokuapp.com/parse"
+      })
+    )
+    
+    if let _ = PFUser.currentUser() {
+      let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("TabBarController")
+      window?.rootViewController = vc
+      window?.makeKeyAndVisible()
+    }
+    
+    NSNotificationCenter.defaultCenter().addObserverForName("UserDidLogout",
+      object: nil,
+      queue: NSOperationQueue.mainQueue()) { (notification: NSNotification) -> Void in
+        self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+    }
+    
     return true
   }
 
